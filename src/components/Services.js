@@ -1,6 +1,5 @@
-import React from "react";
-import styled from "styled-components";
 import { services } from "../utils/constants";
+import styled from "styled-components";
 
 const Services = () => {
   return (
@@ -32,9 +31,7 @@ const Wrapper = styled.section`
     color: var(--clr-primary-1);
   }
   padding: 5rem 0;
-
   background: var(--clr-primary-10);
-
   .header h3 {
     margin-bottom: 2rem;
   }
@@ -89,4 +86,5 @@ const Wrapper = styled.section`
     }
   }
 `;
+
 export default Services;

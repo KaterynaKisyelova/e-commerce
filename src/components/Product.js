@@ -1,7 +1,7 @@
-import styled from "styled-components";
 import { formatPrice } from "../utils/helpers";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const Product = ({ image, name, price, id }) => {
   return (
@@ -75,4 +75,5 @@ const Wrapper = styled.article`
     letter-spacing: var(--spacing);
   }
 `;
+
 export default Product;

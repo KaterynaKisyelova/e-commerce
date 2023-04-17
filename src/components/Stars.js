@@ -1,6 +1,5 @@
-import React from "react";
-import styled from "styled-components";
 import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
+import styled from "styled-components";
 
 const Stars = ({ stars, reviews }) => {
   const tempStars = Array.from({ length: 5 }, (_, index) => {
@@ -41,4 +40,5 @@ const Wrapper = styled.div`
   }
   margin-bottom: 0.5rem;
 `;
+
 export default Stars;

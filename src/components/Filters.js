@@ -1,8 +1,7 @@
-import React from "react";
-import styled from "styled-components";
 import { useFilterContext } from "../context/filter_context";
 import { getUniqueValues, formatPrice } from "../utils/helpers";
 import { FaCheck } from "react-icons/fa";
+import styled from "styled-components";
 
 const Filters = () => {
   const {
@@ -151,7 +150,6 @@ const Wrapper = styled.section`
   .search-input::placeholder {
     text-transform: capitalize;
   }
-
   button {
     display: block;
     margin: 0.25em 0;

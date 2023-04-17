@@ -11,8 +11,8 @@ import {
   Stars,
   PageHero,
 } from "../components";
-import styled from "styled-components";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const SingleProductPage = () => {
   const { id } = useParams();
@@ -99,7 +99,6 @@ const Wrapper = styled.main`
       font-weight: 700;
     }
   }
-
   @media (min-width: 992px) {
     .product-center {
       grid-template-columns: 1fr 1fr;

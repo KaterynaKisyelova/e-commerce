@@ -1,15 +1,15 @@
-import React from "react";
-import styled from "styled-components";
 import logo from "../assets/logo.svg";
+import CartButtons from "./CartButtons";
 import { FaBars } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { links } from "../utils/constants";
-import CartButtons from "./CartButtons";
 import { useProductsContext } from "../context/products_context";
 import { useUserContext } from "../context/user_context";
+import styled from "styled-components";
 
 const Nav = () => {
   const { openSidebar } = useProductsContext();
+  const { myUser } = useUserContext();
 
   return (
     <NavContainer>
@@ -28,6 +28,11 @@ const Nav = () => {
               <Link to={link.url}>{link.text}</Link>
             </li>
           ))}
+          {myUser && (
+            <li>
+              <Link to="/checkout">checkout</Link>
+            </li>
+          )}
         </ul>
         <CartButtons />
       </div>
@@ -40,7 +45,6 @@ const NavContainer = styled.nav`
   display: flex;
   align-items: center;
   justify-content: center;
-
   .nav-center {
     width: 90vw;
     margin: 0 auto;

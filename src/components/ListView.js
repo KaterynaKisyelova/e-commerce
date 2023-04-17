@@ -1,6 +1,6 @@
-import styled from "styled-components";
 import { formatPrice } from "../utils/helpers";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const ListView = ({ products }) => {
   return (

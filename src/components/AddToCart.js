@@ -1,9 +1,9 @@
+import AmountButtons from "./AmountButtons";
 import { useState } from "react";
-import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FaCheck } from "react-icons/fa";
 import { useCartContext } from "../context/cart_context";
-import AmountButtons from "./AmountButtons";
+import styled from "styled-components";
 
 const AddToCart = ({ product }) => {
   const [mainColor, setMainColor] = useState(product.colors[0]);
@@ -101,4 +101,5 @@ const Wrapper = styled.section`
     width: 140px;
   }
 `;
+
 export default AddToCart;

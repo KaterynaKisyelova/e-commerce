@@ -1,5 +1,5 @@
-import { formatPrice } from "../utils/helpers";
 import AmountButtons from "./AmountButtons";
+import { formatPrice } from "../utils/helpers";
 import { FaTrash } from "react-icons/fa";
 import { useCartContext } from "../context/cart_context";
 import styled from "styled-components";

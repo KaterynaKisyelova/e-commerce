@@ -1,6 +1,5 @@
-import React from "react";
-import styled from "styled-components";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const PageHero = ({ title, product }) => {
   return (
@@ -21,7 +20,6 @@ const Wrapper = styled.section`
   min-height: 20vh;
   display: flex;
   align-items: center;
-
   color: var(--clr-primary-1);
   a {
     color: var(--clr-primary-3);

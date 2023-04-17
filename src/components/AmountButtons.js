@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { FaPlus, FaMinus } from "react-icons/fa";
+import styled from "styled-components";
 
 const AmountButtons = ({ increase, decrease, amount }) => {
   return (

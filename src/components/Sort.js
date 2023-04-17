@@ -68,7 +68,6 @@ const Wrapper = styled.section`
     text-transform: capitalize;
     margin-bottom: 0;
   }
-
   .btn-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -93,7 +92,6 @@ const Wrapper = styled.section`
       color: var(--clr-white);
     }
   }
-
   .sort-input {
     border-color: transparent;
     font-size: 1rem;

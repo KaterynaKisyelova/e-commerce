@@ -1,15 +1,15 @@
-import React from "react";
 import logo from "../assets/logo.svg";
+import CartButtons from "./CartButtons";
 import { Link } from "react-router-dom";
 import { useProductsContext } from "../context/products_context";
 import { FaTimes } from "react-icons/fa";
 import { links } from "../utils/constants";
-import styled from "styled-components";
-import CartButtons from "./CartButtons";
 import { useUserContext } from "../context/user_context";
+import styled from "styled-components";
 
 const Sidebar = () => {
   const { isSidebarOpen, closeSidebar } = useProductsContext();
+  const { myUser } = useUserContext();
 
   return (
     <SidebarContainer>
@@ -30,11 +30,13 @@ const Sidebar = () => {
               </Link>
             </li>
           ))}
-          <li>
-            <Link to="/checkout" onClick={closeSidebar}>
-              checkout
-            </Link>
-          </li>
+          {myUser && (
+            <li>
+              <Link to="/checkout" onClick={closeSidebar}>
+                checkout
+              </Link>
+            </li>
+          )}
         </ul>
         <CartButtons />
       </aside>
@@ -87,7 +89,6 @@ const SidebarContainer = styled.div`
     background: var(--clr-grey-10);
     color: var(--clr-grey-2);
   }
-
   .sidebar {
     position: fixed;
     top: 0;

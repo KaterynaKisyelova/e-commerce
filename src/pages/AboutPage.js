@@ -1,8 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import { PageHero } from "../components";
 import aboutImg from "../assets/hero-bcg.jpeg";
+import { PageHero } from "../components";
 import { GiLouvrePyramid } from "react-icons/gi";
+import styled from "styled-components";
 
 const AboutPage = () => {
   return (
