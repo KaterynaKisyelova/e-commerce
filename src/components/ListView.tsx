@@ -1,8 +1,13 @@
 import { formatPrice } from "../utils/helpers";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Product } from "../utils/types";
 
-const ListView = ({ products }) => {
+type Props = {
+  products: Product[];
+};
+
+const ListView = ({ products }: Props) => {
   return (
     <Wrapper>
       {products.map((product) => (

@@ -1,14 +1,49 @@
-import {
-  ADD_TO_CART,
-  CLEAR_CART,
-  COUNT_CART_TOTALS,
-  REMOVE_CART_ITEM,
-  TOGGLE_CART_ITEM_AMOUNT,
-} from "../actions";
+import { CartActionTypes } from "../actions";
+import { SingleCartItem, SingleProduct } from "../utils/types";
 
-const cart_reducer = (state, { type, payload }) => {
+type CartState = {
+  cart: SingleCartItem[];
+  totalItems: number;
+  totalAmount: number;
+  shippingFee: number;
+};
+
+type AddToCartItem = {
+  id: string;
+  color: string;
+  amount: number;
+  product: SingleProduct;
+};
+
+type ChangeAmountItem = { id: string; value: "inc" | "dec" };
+
+type CartAction = {
+  type: CartActionTypes;
+  payload?: AddToCartItem | { id: string } | ChangeAmountItem;
+};
+
+function isAddToCartItem(
+  item: AddToCartItem | { id: string } | ChangeAmountItem | undefined
+): item is AddToCartItem {
+  return (item as AddToCartItem).product !== undefined;
+}
+
+function isChangeAmountItem(
+  item: AddToCartItem | { id: string } | ChangeAmountItem | undefined
+): item is ChangeAmountItem {
+  return (item as ChangeAmountItem).value !== undefined;
+}
+
+const cart_reducer = (
+  state: CartState,
+  { type, payload }: CartAction
+): CartState => {
   switch (type) {
-    case ADD_TO_CART:
+    case CartActionTypes.ADD_TO_CART:
+      if (!isAddToCartItem(payload)) {
+        return { ...state };
+      }
+
       const tempItem = state.cart.find(
         (item) => item.id === payload.id + payload.color
       );
@@ -39,15 +74,23 @@ const cart_reducer = (state, { type, payload }) => {
 
       return { ...state, cart: [...state.cart, newItem] };
 
-    case REMOVE_CART_ITEM:
+    case CartActionTypes.REMOVE_CART_ITEM:
+      if (payload === undefined) {
+        return { ...state };
+      }
+
       const tempCart = state.cart.filter((item) => item.id !== payload.id);
 
       return { ...state, cart: tempCart };
 
-    case CLEAR_CART:
+    case CartActionTypes.CLEAR_CART:
       return { ...state, cart: [] };
 
-    case TOGGLE_CART_ITEM_AMOUNT:
+    case CartActionTypes.TOGGLE_CART_ITEM_AMOUNT:
+      if (!isChangeAmountItem(payload)) {
+        return { ...state };
+      }
+
       const newCart = state.cart.map((item) => {
         if (item.id === payload.id) {
           let newAmount;
@@ -57,18 +100,17 @@ const cart_reducer = (state, { type, payload }) => {
             return { ...item, amount: newAmount };
           }
 
-          if (payload.value === "dec") {
-            newAmount = item.amount <= 1 ? (item.amount = 1) : item.amount - 1;
-          }
+          newAmount = item.amount <= 1 ? (item.amount = 1) : item.amount - 1;
 
           return { ...item, amount: newAmount };
         }
+
         return item;
       });
 
       return { ...state, cart: newCart };
 
-    case COUNT_CART_TOTALS:
+    case CartActionTypes.COUNT_CART_TOTALS:
       const { totalItems, totalAmount } = state.cart.reduce(
         (total, item) => {
           total.totalItems += item.amount;
@@ -83,9 +125,8 @@ const cart_reducer = (state, { type, payload }) => {
       );
 
       return { ...state, totalItems, totalAmount };
-
     default:
-      throw new Error(`No Matching "${type}" - action type`);
+      return { ...state };
   }
 };
 

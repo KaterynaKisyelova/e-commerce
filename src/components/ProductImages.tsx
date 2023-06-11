@@ -1,7 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-const ProductImages = ({ images}) => {
+type Props = {
+  images: { url: string; filename: string }[];
+};
+
+const ProductImages = ({ images }: Props) => {
   const [main, setMain] = useState(images[0]);
 
   return (

@@ -4,8 +4,13 @@ import { Link } from "react-router-dom";
 import { FaCheck } from "react-icons/fa";
 import { useCartContext } from "../context/cart_context";
 import styled from "styled-components";
+import { SingleProduct } from "../utils/types";
 
-const AddToCart = ({ product }) => {
+type Props= {
+  product: SingleProduct
+}
+
+const AddToCart = ({ product }: Props) => {
   const [mainColor, setMainColor] = useState(product.colors[0]);
   const [amount, setAmount] = useState(1);
   const { addToCart } = useCartContext();

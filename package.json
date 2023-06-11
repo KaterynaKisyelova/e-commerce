@@ -1,14 +1,16 @@
 {
-  "name": "comfy",
+  "name": "e-commerce-ts",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^2.0.0",
     "@stripe/react-stripe-js": "^1.14.2",
     "@stripe/stripe-js": "^1.42.1",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.34",
+    "@types/react": "^18.2.7",
+    "@types/react-dom": "^18.2.4",
+    "@types/styled-components": "^5.1.26",
     "airtable-node": "^0.1.20",
     "axios": "^1.1.3",
     "dotenv": "^16.0.3",
@@ -19,11 +21,12 @@
     "react-scripts": "5.0.1",
     "stripe": "^10.16.0",
     "styled-components": "^5.3.6",
-    "web-vitals": "^2.1.4"
+    "typescript": "^4.9.5"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "dev": "netlify dev"
   },
   "eslintConfig": {
     "extends": [
@@ -44,6 +47,6 @@
     ]
   },
   "devDependencies": {
-    "netlify-cli": "^12.1.0"
+    "netlify-cli": "^15.3.1"
   }
 }

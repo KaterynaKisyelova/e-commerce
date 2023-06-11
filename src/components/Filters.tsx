@@ -45,9 +45,13 @@ const Filters = () => {
                   key={index}
                   onClick={updateFilters}
                   name="category"
-                  className={category === item.toLowerCase() ? "active" : ""}
+                  className={
+                    typeof item === "string" && category === item.toLowerCase()
+                      ? "active"
+                      : ""
+                  }
                 >
-                  {item}
+                  {typeof item === "string" && item}
                 </button>
               ))}
             </div>
@@ -56,13 +60,16 @@ const Filters = () => {
             <h5>company</h5>
             <select
               name="company"
-              value={company}
+              value={typeof company === "string" ? company : ""}
               onChange={updateFilters}
               className="company"
             >
               {companies.map((item, index) => (
-                <option key={index} value={item}>
-                  {item}
+                <option
+                  key={index}
+                  value={typeof item === "string" ? item : ""}
+                >
+                  {typeof item === "string" && item}
                 </option>
               ))}
             </select>
@@ -88,7 +95,12 @@ const Filters = () => {
                   <button
                     key={index}
                     name="color"
-                    style={{ background: item }}
+                    style={{
+                      background:
+                        typeof item === "boolean" || typeof item === "object"
+                          ? ""
+                          : item,
+                    }}
                     className={
                       color === item ? "color-btn active" : "color-btn"
                     }

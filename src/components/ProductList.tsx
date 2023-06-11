@@ -14,7 +14,7 @@ const ProductList = () => {
       {!gridView ? (
         <ListView products={filteredProducts} />
       ) : (
-        <GridView products={filteredProducts}>product list</GridView>
+        <GridView products={filteredProducts}></GridView>
       )}
     </>
   );

@@ -1,7 +1,12 @@
 import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
 import styled from "styled-components";
 
-const Stars = ({ stars, reviews }) => {
+type Props = {
+  stars: number;
+  reviews: number;
+};
+
+const Stars = ({ stars, reviews }: Props) => {
   const tempStars = Array.from({ length: 5 }, (_, index) => {
     const number = index + 0.5;
 

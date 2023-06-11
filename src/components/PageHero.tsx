@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const PageHero = ({ title, product }) => {
+type Props = {
+  title: string;
+  product?: boolean;
+};
+
+const PageHero = ({ title, product }: Props) => {
   return (
     <Wrapper>
       <div className="section-center">

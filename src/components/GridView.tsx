@@ -1,7 +1,14 @@
+import { Product as ProductType, SingleProduct } from "../utils/types";
 import Product from "./Product";
 import styled from "styled-components";
 
-const GridView = ({ products }) => {
+type Props = {
+  products: ProductType[];
+};
+
+const GridView = ({ products }: Props) => {
+  console.log(products)
+
   return (
     <Wrapper>
       <div className="products-container">

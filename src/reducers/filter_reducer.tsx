@@ -1,17 +1,63 @@
-import {
-  LOAD_PRODUCTS,
-  SET_LISTVIEW,
-  SET_GRIDVIEW,
-  UPDATE_SORT,
-  SORT_PRODUCTS,
-  UPDATE_FILTERS,
-  FILTER_PRODUCTS,
-  CLEAR_FILTERS,
-} from "../actions";
+import { FilterActionTypes } from "../actions";
+import { Product } from "../utils/types";
 
-const filter_reducer = (state, { type, payload }) => {
+type FilterState = {
+  filteredProducts: Product[];
+  allProducts: Product[];
+  gridView: boolean;
+  sort: string;
+  filters: {
+    text: string;
+    company: string;
+    category: string;
+    color: string;
+    minPrice: number;
+    maxPrice: number;
+    price: number;
+    shipping: boolean;
+  };
+};
+
+function isProductsArray(
+  payload: Product[] | undefined | UpdateFiltersPayload | SortPayload
+): payload is Product[] {
+  return Array.isArray(payload as Product[]);
+}
+
+function isUpdateFiltersPayload(
+  payload: Product[] | undefined | UpdateFiltersPayload | SortPayload
+): payload is UpdateFiltersPayload {
+  return (payload as UpdateFiltersPayload).name !== undefined;
+}
+
+function isSortPayload(
+  payload: Product[] | undefined | UpdateFiltersPayload | SortPayload
+): payload is SortPayload {
+  return (payload as SortPayload).value !== undefined;
+}
+
+type UpdateFiltersPayload = {
+  name: string;
+  value: string | number | boolean;
+};
+
+type SortPayload = { value: string };
+
+type FilterAction = {
+  type: FilterActionTypes;
+  payload?: Product[] | UpdateFiltersPayload | SortPayload;
+};
+
+const filter_reducer = (
+  state: FilterState,
+  { type, payload }: FilterAction
+): FilterState => {
   switch (type) {
-    case LOAD_PRODUCTS:
+    case FilterActionTypes.LOAD_PRODUCTS:
+      if (!isProductsArray(payload)) {
+        return { ...state };
+      }
+
       const maxPrice = Math.max(...payload.map((product) => product.price));
 
       return {
@@ -20,13 +66,17 @@ const filter_reducer = (state, { type, payload }) => {
         filteredProducts: [...payload],
         filters: { ...state.filters, maxPrice, price: maxPrice },
       };
-    case SET_GRIDVIEW:
+    case FilterActionTypes.SET_GRID_VIEW:
       return { ...state, gridView: true };
-    case SET_LISTVIEW:
+    case FilterActionTypes.SET_LIST_VIEW:
       return { ...state, gridView: false };
-    case UPDATE_SORT:
-      return { ...state, sort: payload };
-    case SORT_PRODUCTS:
+    case FilterActionTypes.UPDATE_SORT:
+      if (!isSortPayload(payload)) {
+        return { ...state };
+      }
+
+      return { ...state, sort: payload.value };
+    case FilterActionTypes.SORT_PRODUCTS:
       const { sort, filteredProducts } = state;
       let tempProducts = [...filteredProducts];
 
@@ -48,11 +98,15 @@ const filter_reducer = (state, { type, payload }) => {
       }
 
       return { ...state, filteredProducts: tempProducts };
-    case UPDATE_FILTERS:
+    case FilterActionTypes.UPDATE_FILTERS:
+      if (!isUpdateFiltersPayload(payload)) {
+        return { ...state };
+      }
+
       const { name, value } = payload;
 
       return { ...state, filters: { ...state.filters, [name]: value } };
-    case FILTER_PRODUCTS:
+    case FilterActionTypes.FILTER_PRODUCTS:
       const { text, category, company, color, price, shipping } = state.filters;
       let filtered = [...state.allProducts];
 
@@ -80,7 +134,7 @@ const filter_reducer = (state, { type, payload }) => {
       }
 
       return { ...state, filteredProducts: filtered };
-    case CLEAR_FILTERS:
+    case FilterActionTypes.CLEAR_FILTERS:
       return {
         ...state,
         filters: {
@@ -94,7 +148,7 @@ const filter_reducer = (state, { type, payload }) => {
         },
       };
     default:
-      throw new Error(`No Matching "${type}" - action type`);
+      return { ...state };
   }
 };
 

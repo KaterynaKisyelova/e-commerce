@@ -2,8 +2,9 @@ import { formatPrice } from "../utils/helpers";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Product as ProductType } from "../utils/types";
 
-const Product = ({ image, name, price, id }) => {
+const Product = ({ image, name, price, id }: ProductType) => {
   return (
     <Wrapper>
       <figure className="container">

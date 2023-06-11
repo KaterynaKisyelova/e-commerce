@@ -3,8 +3,16 @@ import { formatPrice } from "../utils/helpers";
 import { FaTrash } from "react-icons/fa";
 import { useCartContext } from "../context/cart_context";
 import styled from "styled-components";
+import { SingleCartItem } from "../utils/types";
 
-const CartItem = ({ id, image, name, color, price, amount }) => {
+const CartItem = ({
+  id,
+  image,
+  name,
+  color,
+  price,
+  amount,
+}: SingleCartItem) => {
   const { removeItem, toggleAmount } = useCartContext();
 
   const increase = () => {

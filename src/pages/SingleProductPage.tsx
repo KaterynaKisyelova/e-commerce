@@ -40,7 +40,7 @@ const SingleProductPage = () => {
     <>
       {loading && <Loading />}
       {error && <Error />}
-      {product.images && (
+      {product.images[0] && (
         <Wrapper>
           <PageHero title={product.name} product />
           <div className="section section-center page">
