@@ -1,7 +1,7 @@
 import { formatPrice } from "../utils/helpers";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import { Product } from "../utils/types";
+import styled from "styled-components";
 
 type Props = {
   products: Product[];

@@ -1,4 +1,4 @@
-import { Product as ProductType, SingleProduct } from "../utils/types";
+import { Product as ProductType } from "../utils/types";
 import Product from "./Product";
 import styled from "styled-components";
 
